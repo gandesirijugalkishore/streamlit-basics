@@ -39,7 +39,7 @@ if uploaded_file is not None:
     inp = st.number_input("ASSIGNMENTS NUMBER")
     inp=int(inp)
     x=assign_df.columns
-    print(x[inp-1])
+    print(x[inp])
     no_of_rows = assign_df.shape[0]
     sum_of_missing_data = assign_df[x[inp-1]].isnull().sum()
     st.write("NUMBER OF STUDENTS WHO DID NOT SUBMIT",sum_of_missing_data)
