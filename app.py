@@ -25,7 +25,7 @@ if uploaded_file is not None:
     st.write(input_df.select_dtypes('object').nunique())
     data=input_df.dropna(axis=1, how='all')
     #filtering columns that starts with specific names and converted into a dataframe
-    colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment"]
+    colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment","USERNAME","Lab"]
     assign_df=data[data.columns[data.columns.str.startswith(tuple(colsToScale))]]
     st.write(assign_df)
     
