@@ -22,7 +22,7 @@ uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["cs
 if uploaded_file is not None:
     input_df = pd.read_csv(uploaded_file)
     st.write(input_df.head())
-    st.write("NUMBER OF STUDNETS",input_df["Student ID"].nunique())
+    st.write("NUMBER OF STUDNETS",input_df["Username"].nunique())
     #filtering columns that starts with specific names and converted into a dataframe
     colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment","Assignment","ASIGNMENT","Lab"]
     assign_df=input_df[input_df.columns[input_df.columns.str.startswith(tuple(colsToScale))]]
