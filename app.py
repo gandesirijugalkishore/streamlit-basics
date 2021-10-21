@@ -35,7 +35,7 @@ if uploaded_file is not None:
     st.write("NO.of Assignments need to be graded",assign_df.isin(['Needs Grading','Needs Grading(99.00)']).sum(axis=0))
     #Student Details with Username
     inp_uname = st.text_input("Username")
-    st.write(df.loc[df['Username'] == inp_uname])
+    st.write(input_df.loc[input_df['Username'] == inp_uname])
     
 #     st.write(input_df.select_dtypes('object').nunique())
 #     data=input_df.dropna(axis=1, how='all')
