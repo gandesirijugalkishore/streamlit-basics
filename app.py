@@ -22,37 +22,52 @@ uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["cs
 if uploaded_file is not None:
     input_df = pd.read_csv(uploaded_file)
     st.write(input_df.head())
-    st.write(input_df.select_dtypes('object').nunique())
-    data=input_df.dropna(axis=1, how='all')
+    st.write("NUMBER OF STUDNETS",input_df["Student ID"].nunique())
     #filtering columns that starts with specific names and converted into a dataframe
-    colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment","USERNAME","Lab"]
-    assign_df=data[data.columns[data.columns.str.startswith(tuple(colsToScale))]]
-    st.write(assign_df)
-    
-    # lets check the percentage of missing data in each columns present in the data
-
+    colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment","Assignment","ASIGNMENT","Lab"]
+    assign_df=input_df[input_df.columns[input_df.columns.str.startswith(tuple(colsToScale))]]
+    st.write("USERNAME AND GRADES FOR COMPLETED LABS",assign_df)
+    #NO.of students who have not submitted assignments
     no_of_rows = assign_df.shape[0]
     percentage_of_missing_data = assign_df.isnull().sum()
-    st.write(percentage_of_missing_data)
+    st.write("NO.of students who have not submitted assignments",percentage_of_missing_data)
+    #NO.of Assignments need to be graded
+    st.write("NO.of Assignments need to be graded",assign_df.isin(['Needs Grading','Needs Grading(99.00)']).sum(axis=0))
+    #Student Details with Username
+    inp_uname = st.text_input("Username")
+    st.write(df.loc[df['Username'] == inp_uname])
     
-    #get stats based on assignemtn number
-    inp = st.number_input("ASSIGNMENTS NUMBER")
-    inp=int(inp)
-    x=assign_df.columns
-    print(x[inp])
-    no_of_rows = assign_df.shape[0]
-    sum_of_missing_data = assign_df[x[inp]].isnull().sum()
-    st.write("NUMBER OF STUDENTS WHO DID NOT SUBMIT",sum_of_missing_data)
+#     st.write(input_df.select_dtypes('object').nunique())
+#     data=input_df.dropna(axis=1, how='all')
+#     #filtering columns that starts with specific names and converted into a dataframe
+#     colsToScale=["Username","ASSIGNMENT", "LAB", "Assignment","USERNAME","Lab"]
+#     assign_df=data[data.columns[data.columns.str.startswith(tuple(colsToScale))]]
+#     st.write(assign_df)
     
-    #Total assignmetns
-    assign_user_df =  assign_df[["Username"]]
-    assign_user_df["Number of assignments not submitted"] = assign_df.isnull().sum(axis=1)
-    st.write(assign_user_df)
+#     # lets check the percentage of missing data in each columns present in the data
+
+#     no_of_rows = assign_df.shape[0]
+#     percentage_of_missing_data = assign_df.isnull().sum()
+#     st.write(percentage_of_missing_data)
     
-    #User
-    user_input = st.text_input("Name")
-    assign_user_df.loc[assign_user_df['Username'] == user_input]
-    st.write(assign_user_df)
+#     #get stats based on assignemtn number
+#     inp = st.number_input("ASSIGNMENTS NUMBER")
+#     inp=int(inp)
+#     x=assign_df.columns
+#     print(x[inp])
+#     no_of_rows = assign_df.shape[0]
+#     sum_of_missing_data = assign_df[x[inp]].isnull().sum()
+#     st.write("NUMBER OF STUDENTS WHO DID NOT SUBMIT",sum_of_missing_data)
+    
+#     #Total assignmetns
+#     assign_user_df =  assign_df[["Username"]]
+#     assign_user_df["Number of assignments not submitted"] = assign_df.isnull().sum(axis=1)
+#     st.write(assign_user_df)
+    
+#     #User
+#     user_input = st.text_input("Name")
+#     assign_user_df.loc[assign_user_df['Username'] == user_input]
+#     st.write(assign_user_df)
 
 #     c=['Username',
 #         'ASSIGNMENT # 1 [Total Pts: 100 Score] |1344236',
